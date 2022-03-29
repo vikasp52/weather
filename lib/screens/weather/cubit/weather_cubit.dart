@@ -1,11 +1,12 @@
 import 'dart:async';
 import 'dart:io';
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:weather/repository/weather_repository/model/model.dart';
 import 'package:weather/repository/weather_repository/weather_repository.dart';
 
@@ -13,13 +14,12 @@ part 'weather_state.dart';
 
 class WeatherCubit extends Cubit<WeatherState> {
   WeatherCubit({
-    required this.weatherRepossitory,
+    required this.weatherRepository,
   }) : super(WeatherLoading()) {
-    //getWeatherData(cityName: 'Delhi');
     determinePosition();
   }
 
-  final WeatherRepossitory weatherRepossitory;
+  final WeatherRepossitory weatherRepository;
   var weatherController = StreamController<Weather>.broadcast();
   var selectedDayController = StreamController<int>.broadcast();
 
@@ -65,8 +65,6 @@ class WeatherCubit extends Cubit<WeatherState> {
     getWeatherData(
       cityName: place.locality!,
     );
-
-    //return position;
   }
 
   Future<void> getWeatherData({
@@ -86,7 +84,7 @@ class WeatherCubit extends Cubit<WeatherState> {
     emit(WeatherLoading());
 
     if (previousCity == null) {
-      city = await weatherRepossitory.getCity(
+      city = await weatherRepository.getCity(
         cityName: cityName,
       );
     } else {
@@ -97,7 +95,7 @@ class WeatherCubit extends Cubit<WeatherState> {
       return emit(WeatherNoData('We are not able to find this location'));
     }
 
-    List<Weather> weatherList = await weatherRepossitory.getConsolidatedWeather(
+    List<Weather> weatherList = await weatherRepository.getConsolidatedWeather(
       woeid: city.woeid,
     );
 
@@ -132,7 +130,7 @@ class WeatherCubit extends Cubit<WeatherState> {
 
     try {
       List<Weather> weatherList =
-          await weatherRepossitory.getConsolidatedWeather(
+          await weatherRepository.getConsolidatedWeather(
         woeid: city.woeid,
       );
 

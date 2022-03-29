@@ -1,6 +1,6 @@
+import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:bloc_test/bloc_test.dart';
 import 'package:weather/repository/weather_repository/model/city.dart';
 import 'package:weather/repository/weather_repository/model/weather.dart';
 import 'package:weather/repository/weather_repository/weather_repository.dart';
@@ -34,7 +34,7 @@ main() {
   setUp(() {
     mockWeatherepository = MockWeatherepository();
 
-    weatherCubit = WeatherCubit(weatherRepossitory: mockWeatherepository);
+    weatherCubit = WeatherCubit(weatherRepository: mockWeatherepository);
 
     when(() => mockWeatherepository.getCity(cityName: 'Mumbai'))
         .thenAnswer((_) async => city);

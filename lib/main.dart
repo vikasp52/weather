@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather/repository/weather_repository/weather_repository.dart';
 import 'package:weather/screens/weather/cubit/weather_cubit.dart';
 import 'package:weather/screens/weather/weather.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       home: BlocProvider(
         create: (context) => WeatherCubit(
-          weatherRepossitory: WeatherRepossitory(),
+          weatherRepository: WeatherRepossitory(),
         ),
         child: const WeatherScreen(),
       ),

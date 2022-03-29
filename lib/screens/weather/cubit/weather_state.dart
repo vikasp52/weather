@@ -29,7 +29,6 @@ class WeatherPermission extends WeatherState {
   final String message;
 }
 
-// ignore: must_be_immutable
 class WeatherError extends WeatherState {
   WeatherError({
     required this.errorMessage,
