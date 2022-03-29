@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather/repository/weather_repository/model/model.dart';
-import 'package:weather/screens/weather/cubit/weather_cubit.dart';
 import 'package:weather/screens/weather/widgets/widgets.dart';
-import 'package:weather/util/colors.dart';
 
 class WeatherCardDetails extends StatelessWidget {
   const WeatherCardDetails({
@@ -15,8 +12,6 @@ class WeatherCardDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<WeatherCubit>();
-
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
